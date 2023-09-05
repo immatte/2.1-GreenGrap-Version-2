@@ -34,6 +34,9 @@
     border: 2px solid rgba(68, 53, 5, 0.26);
     box-shadow: 1px 1px 10px 1px rgba(72, 72, 72, 0.208);
 }
+.veggieImage:hover{
+    cursor:pointer;
+}
 
 #veggieText{
     margin-top: 5px;
