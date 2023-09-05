@@ -1,0 +1,73 @@
+.ForV {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 20px;
+    margin-top: 5px;
+    padding-top: 5px;
+    /* padding-bottom: 5px; */
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+    height: 30px;
+}
+
+#All {
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.navItem {
+    color: rgb(175, 170, 109);
+    text-align: center;
+}
+
+.background h2 {
+    font-size: 150%;
+    color: rgb(112, 87, 11);
+    padding-top: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#months{
+    display: grid;
+    gap: 20px;
+    scale: 70%;
+    margin-top: -110px;
+    margin-bottom: -70px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    list-style-type: none;
+    font-size: 200%;
+    box-sizing: border-box;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+    /* grid-template-columns: 1fr 1fr 1fr; */
+    
+}
+.monthsbox{
+    /* width: 300px; */
+    background-color: rgba(255, 255, 255, 0.847);
+    border-radius: 8px;
+    color: rgb(134, 130, 84);
+    margin: 10px;
+    padding: 65px 20px;
+    cursor: pointer;
+    border: 2px solid rgba(68, 53, 5, 0.26);
+    box-shadow: 3px 3px 10px 3px rgba(72, 72, 72, 0.208);
+}
+
+/* added FE */
+.active{
+    background-color: rgb(175, 170, 109);
+    color:rgb(252, 251, 250)
+}
+
+.background{
+    border-radius: 20px;
+    background-image: url('https://www.pixelstalk.net/wp-content/uploads/images3/Funny-Panda-Backgrounds.jpeg');
+    background-position: 50% 0%;
+    /* background-repeat: no-repeat; */
+    /* background-position: center; */
+    background-size: cover;
+    margin-top: -2%;
+  }

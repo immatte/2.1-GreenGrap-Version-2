@@ -1,0 +1,42 @@
+.dancingPanda {
+  width: 500px;
+}
+
+.dcentering {
+  text-align: center;
+}
+
+
+  h2.background {
+      /* display: flex;  */
+      /* or inline-flex */
+      /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+      /* font-size: 250%;
+      color: rgb(116, 116, 116);
+      padding-bottom: 0;
+      padding: 40px;
+      text-transform: capitalize; */
+  
+  }
+  
+  /* .Apptitle{
+    
+    margin-left: 28%;
+    padding: 20px;
+    align-items: center;
+    font-size: 450%;
+    color: white;
+    width: 600px;
+    background-color: rgb(175, 170, 109);
+    border: 1px solid rgba(146, 146, 146, 0.338);
+    box-shadow:  3px 3px 10px 3px rgba(72, 72, 72, 0.208);
+    border-radius: 20px;
+    
+  } */
+  
+  #background1{
+    /* border-radius: 20px; */
+    /* background-image: url('https://i.pinimg.com/originals/b8/44/51/b844518e4262f54396470be38f183aae.gif'); */
+    /* background-position: 50% 0; */
+    /* height: 800px; */
+  }

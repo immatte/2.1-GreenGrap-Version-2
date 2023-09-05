@@ -1,0 +1,49 @@
+.monthFruits {
+    /* object-fit: cover; */
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 100%;
+    list-style-type: none;
+    /* font-size: 100%; */
+    text-transform: capitalize ;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;;
+    font-weight: normal;
+}
+    
+    #FruitsGrid {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    padding: 0;
+    /* padding-right: 80px; */
+    /* gap: 5px; */
+    width: 100%;
+    list-style-type:none    
+}
+
+.fruitImage {
+    width: 80%;
+    height: 80%;
+    aspect-ratio: 1/1;
+    background-color: rgb(255, 255, 255);
+    object-fit: contain;
+    text-align: center;
+    /* margin: auto; */
+    background-color: rgba(255, 255, 255, 0.847);
+    border-radius: 5px;
+    border: 2px solid rgba(68, 53, 5, 0.26);
+    box-shadow: 1px 1px 10px 1px rgba(72, 72, 72, 0.208);
+}
+
+#fruitText{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#fruitbox{
+
+    width: 100%;
+    overflow: hidden;
+    /* box-sizing: initial; */
+    margin-bottom: 30px;  
+}
