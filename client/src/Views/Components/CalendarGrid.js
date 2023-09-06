@@ -58,11 +58,19 @@ function CalendarGrid(props) {
     
   const handleVeggieDetails = (event) => {
     let featVisible = event.target.alt;
-    // setfeatVisible(featVisible);
     let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
     setfeatVisible(featVeggie);
     console.log(featVeggie)
     };
+
+    const handleFruitDetails = (event) => {
+        let featVisible = event.target.alt;
+        let featFruit = props.monthFruits.find(fruit => (fruit.fruit_name===featVisible))
+        setfeatVisible(featFruit);
+        console.log(featFruit)
+        };
+    console.log(props.monthFruits)
+
 
 
     return (
@@ -96,9 +104,13 @@ function CalendarGrid(props) {
                      onClick={()=> handleChangeView(true)}>Fruits</div>
             </nav>
         {(featVisible)&&<img src={featVisible.veggie_url} alt={featVisible.veggie_name}/>}
-
+        {(isFruits)&&(featVisible)&&<img src={featVisible.fruit_url} alt={featVisible.fruit_name}/>}
       {(isFruits)
-           ? <FruitsGrid monthFruits = {props.monthFruits}/>
+           ? <FruitsGrid monthFruits = {props.monthFruits}
+                handleFruitDetailsCb={fruit => handleFruitDetails(fruit)}
+                featVisible = {props.featVisible}
+                setfeatVisible={props.setfeatVisible}
+                />
            : <VeggiesGrid 
                 monthVeggies = {props.monthVeggies}
                 handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
@@ -106,6 +118,7 @@ function CalendarGrid(props) {
                 setfeatVisible={props.setfeatVisible}
 
                 />
+            
       }
            </div>
             )}

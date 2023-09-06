@@ -7,17 +7,6 @@ import { Routes, Route, Link } from "react-router-dom";
 
 function VeggiesGrid(props) {
 
-    const EMPTY_FORM = {
-        country_fk: '',
-        id: 0,
-        month_fk: '',
-        veggie_name: '',
-        veggie_type: '',
-        veggie_url: '',
-        veggie_fk: '',
-    };
-
-
     //MAKE VISIBLE VEGGIE DETAILS WHEN CLICKING ON A VEGGIE IMAGE FROM THE GRID
     const handleChangeView = (event) => {
         props.handleVeggieDetailsCb(event)
@@ -36,7 +25,6 @@ function VeggiesGrid(props) {
                 <li id='veggiesbox'>
                     <img className='veggieImage'
                         onClick={handleChangeView}
-                        // onClick={handleChangeView}
                         src= {veggie.veggie_url}
                         alt= {veggie.veggie_name}
                         />

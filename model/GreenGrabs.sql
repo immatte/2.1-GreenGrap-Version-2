@@ -97,7 +97,7 @@ VALUES (1,'aguacate',"https://frutascharito.es/702-large_default/aguacates-unida
 (24,'melón',"https://frutascharito.es/335-large_default/melon-piel-sapo-unidad.jpg"),
 (25,'arándano',"https://frutascharito.es/144-large_default/arandanos.jpg"),
 (26,'higo',"https://frutascharito.es/1477-large_default/higos-chumbos.jpg"),
-(27,'mango',"https://frutascharito.es/349-large_default/mangas-tropicales.jpg"),
+(27,'mango',"https://www.agroponiente.com/wp-content/uploads/2021/08/mango-Agroponiente.png"),
 (28,'manzana',"https://frutascharito.es/1116-large_default/manzanas-granny-smith.jpg"),
 (29,'uvas',"https://frutascharito.es/62-large_default/uvas-negras-sin-semilla.jpg"),
 (30,'lima',"https://th.bing.com/th/id/OIP.GrXQjizTdsNDebsCeMs82QHaHa?pid=ImgDet&rs=1"),

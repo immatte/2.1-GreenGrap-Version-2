@@ -6,6 +6,10 @@ import { Routes, Route, Link } from "react-router-dom";
 /* CHILD OF CALENDAR GRID */
 
 function FruitsGrid(props) {
+
+    const handleChangeView = (event) => {
+        props.handleFruitDetailsCb(event)
+    };
     
     return (
     <div>
@@ -16,6 +20,7 @@ function FruitsGrid(props) {
              props.monthFruits.map((fruit) => (
                 <li id='fruitbox'>
                   <img className='fruitImage'
+                     onClick={handleChangeView}
                      src= {fruit.fruit_url}
                      alt= {fruit.fruit_name}
                   />
