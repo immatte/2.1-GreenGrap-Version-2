@@ -12,7 +12,7 @@ function App() {
 
   const [ monthveggies, setMonthveggies ] = useState([]);
   const [ monthfruits, setMonthfruits ] = useState([]);
-  const [ selectedCountry, setSelectedCountry ] = useState(false);
+  const [ selectedCountry, setSelectedCountry ] = useState();
 
   console.log(selectedCountry);
   
@@ -70,9 +70,11 @@ function App() {
 
       <div>
         <Routes>
-          <Route path="/" element={ <UserView requestMonthCb={text => requestMonth(text)}
-                  setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+          <Route path="/" element={ <UserView 
+                  requestMonthCb={text => requestMonth(text)}
                   requestMonth2Cb={text => requestMonth2(text)}
+                  setSelectedCountry ={setSelectedCountry}  
+                  selectedCountry={selectedCountry}
                   monthVeggies = {monthveggies}
                   monthFruits={monthfruits}/>}> 
           </Route>

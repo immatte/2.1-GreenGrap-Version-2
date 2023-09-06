@@ -17,34 +17,29 @@ function VeggiesGrid(props) {
         veggie_fk: '',
     };
 
-    const [featVisible, setfeatVisible] = useState(EMPTY_FORM);
 
     //MAKE VISIBLE VEGGIE DETAILS WHEN CLICKING ON A VEGGIE IMAGE FROM THE GRID
     const handleChangeView = (event) => {
-        let featVisible = event.target.alt;
-        // setfeatVisible(featVisible);
-        let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
-        setfeatVisible(featVeggie);
-        console.log(featVeggie)
+        props.handleVeggieDetailsCb(event)
     };
 
-    console.log(featVisible)
-    console.log(featVisible.veggie_url)
+    // console.log(featVisible)
+    // console.log(featVisible.veggie_url)
 
     return (
     <div>
         <div className='monthVeggies'>
-            {(featVisible)&&<img src={featVisible.veggie_url} alt={featVisible.veggie_name}/>}
 
             <ul id="VeggiesGrid">
             {
             props.monthVeggies.map((veggie) => (
                 <li id='veggiesbox'>
                     <img className='veggieImage'
-                         onClick={handleChangeView}
-                         src= {veggie.veggie_url}
-                         alt= {veggie.veggie_name}
-                         />
+                        onClick={handleChangeView}
+                        // onClick={handleChangeView}
+                        src= {veggie.veggie_url}
+                        alt= {veggie.veggie_name}
+                        />
                     <h5 id='veggieText'> {veggie.veggie_name} </h5>
                 </li>
             )) 

@@ -18,7 +18,7 @@ function CalendarGrid(props) {
     // When clicking on a month, we make it active. We start at -1 because 0 has already the first month
     const [ active, setActive ] = useState(-1); //to make one month active
     const [ isFruits, setIsFruits ] = useState(false); //display veggies by default
-    console.log(props.selectedCountry)
+    // console.log(props.selectedCountry)
 
     // We select a country, and after clicking on a month button it's displaying its grids.
     // But then, we want to select another country, so we change THE SELECTED COUNTRY in the select bar.
@@ -32,15 +32,38 @@ function CalendarGrid(props) {
         props.requestMonth2Cb(month);
         props.requestMonthCb(month);
         setActive(month);
-        console.log(yearcalendar[month]) //just testing
+        setfeatVisible(EMPTY_FORM);
+        // console.log(yearcalendar[month]) //just testing
     };
 
     const handleChangeView = (isFruits) => {
         setIsFruits(isFruits);
+        setfeatVisible(EMPTY_FORM);
     }
 
     //array of the Month used in handleClick function
     let yearcalendar = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+        const EMPTY_FORM = {
+        country_fk: '',
+        id: 0,
+        month_fk: '',
+        veggie_name: '',
+        veggie_type: '',
+        veggie_url: '',
+        veggie_fk: '',
+    };
+
+  const [featVisible, setfeatVisible] = useState(EMPTY_FORM);
+    
+  const handleVeggieDetails = (event) => {
+    let featVisible = event.target.alt;
+    // setfeatVisible(featVisible);
+    let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
+    setfeatVisible(featVeggie);
+    console.log(featVeggie)
+    };
+
 
     return (
     <div className="row d-flex justify-content-center" id="All">
@@ -72,9 +95,17 @@ function CalendarGrid(props) {
                 <div className= {`navItem ${isFruits ? 'active' : null}`}
                      onClick={()=> handleChangeView(true)}>Fruits</div>
             </nav>
-      {(isFruits )
+        {(featVisible)&&<img src={featVisible.veggie_url} alt={featVisible.veggie_name}/>}
+
+      {(isFruits)
            ? <FruitsGrid monthFruits = {props.monthFruits}/>
-           : <VeggiesGrid monthVeggies = {props.monthVeggies}/>
+           : <VeggiesGrid 
+                monthVeggies = {props.monthVeggies}
+                handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
+                featVisible = {props.featVisible}
+                setfeatVisible={props.setfeatVisible}
+
+                />
       }
            </div>
             )}

@@ -10,8 +10,6 @@ import Header from './Components/Header';
 
 function UserView(props) {
 
-    
-    
     return (
     <div className="row d-flex justify-content-center">
            
@@ -20,10 +18,13 @@ function UserView(props) {
         <div className="col-xl-12 col-lg-12 col-md-12 col-12">
           <div className="row justify-content-center text-left pt-3">
 
-            <CalendarGrid requestMonthCb={text => props.requestMonthCb(text)}
-            requestMonth2Cb={text => props.requestMonth2Cb(text)} monthFruits={props.monthFruits}
-            monthVeggies = {props.monthVeggies}
-            selectedCountry={props.selectedCountry}/>
+            <CalendarGrid 
+              requestMonthCb={text => props.requestMonthCb(text)}
+              requestMonth2Cb={text => props.requestMonth2Cb(text)} monthFruits={props.monthFruits}
+              monthVeggies={props.monthVeggies}
+              selectedCountry={props.selectedCountry}
+              // handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
+            />
 
           </div>
         </div>
