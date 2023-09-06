@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import './CalendarGrid.css';
 import { useState } from 'react';
-import { Routes, Route, Link } from "react-router-dom";
 import VeggiesGrid from './VeggiesGrid';
 import FruitsGrid from './FruitsGrid';
+
+
+
 
 /* CHILD OF USERVIEW 
 --> Lines 31-35 (lines changes I guess) are creating a grid of Months(y) from the array of "yearcalendar" 
@@ -16,6 +18,7 @@ function CalendarGrid(props) {
     // When clicking on a month, we make it active. We start at -1 because 0 has already the first month
     const [ active, setActive ] = useState(-1); //to make one month active
     const [ isFruits, setIsFruits ] = useState(false); //display veggies by default
+    console.log(props.selectedCountry)
 
     // We select a country, and after clicking on a month button it's displaying its grids.
     // But then, we want to select another country, so we change THE SELECTED COUNTRY in the select bar.
@@ -43,7 +46,7 @@ function CalendarGrid(props) {
     <div className="row d-flex justify-content-center" id="All">
         <div className='background'>
             <h2> Click to find your Month veggies ! </h2>
-               
+               {(props.selectedCountry)&&
                 <div id='months'>
                     {/* First Part : Calendar Grid buttons*/}
                     {
@@ -55,7 +58,7 @@ function CalendarGrid(props) {
                             </div>
                         ))
                     }
-                </div>
+                </div>}
 
         </div>
 

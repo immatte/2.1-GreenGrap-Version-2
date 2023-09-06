@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './VeggiesGrid.css';
 import { useState } from 'react';
 import { Routes, Route, Link } from "react-router-dom";
@@ -7,13 +7,35 @@ import { Routes, Route, Link } from "react-router-dom";
 
 function VeggiesGrid(props) {
 
-    async function handleChangeView (event){
-        console.log(event.target.alt)
-    }
+    const EMPTY_FORM = {
+        country_fk: '',
+        id: 0,
+        month_fk: '',
+        veggie_name: '',
+        veggie_type: '',
+        veggie_url: '',
+        veggie_fk: '',
+    };
+
+    const [featVisible, setfeatVisible] = useState(EMPTY_FORM);
+
+    //MAKE VISIBLE VEGGIE DETAILS WHEN CLICKING ON A VEGGIE IMAGE FROM THE GRID
+    const handleChangeView = (event) => {
+        let featVisible = event.target.alt;
+        // setfeatVisible(featVisible);
+        let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
+        setfeatVisible(featVeggie);
+        console.log(featVeggie)
+    };
+
+    console.log(featVisible)
+    console.log(featVisible.veggie_url)
 
     return (
     <div>
         <div className='monthVeggies'>
+            {(featVisible)&&<img src={featVisible.veggie_url} alt={featVisible.veggie_name}/>}
+
             <ul id="VeggiesGrid">
             {
             props.monthVeggies.map((veggie) => (

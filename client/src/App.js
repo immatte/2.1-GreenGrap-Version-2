@@ -10,14 +10,13 @@ Check calendarGrid comments for lines 11-28(lines changed I guess)
 
 function App() {
 
-  const [ request, setRequest ] = useState([]);
-  const [ request2, setRequest2 ] = useState([]);
-  const [ selectedCountry, setSelectedCountry ] = useState(0);
+  const [ monthveggies, setMonthveggies ] = useState([]);
+  const [ monthfruits, setMonthfruits ] = useState([]);
+  const [ selectedCountry, setSelectedCountry ] = useState(false);
 
   console.log(selectedCountry);
-  // console.log(month);
-
-
+  
+  
   // requestMonth uses a specific route created for creating a new table
   const requestMonth = async (month) => {
     //NewRequest --> date(Month)
@@ -26,7 +25,7 @@ function App() {
       let response = await fetch(`/veggies/${selectedCountry}/${month}`);
       if (response.ok) {
         let data = await response.json();
-        setRequest(data);
+        setMonthveggies(data);
         console.log(data)
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
@@ -37,6 +36,7 @@ function App() {
     
   };
 
+
   const requestMonth2 = async (month) => {
     //NewRequest --> date(Month)
     //Get the FRUITS linked to Month and Country
@@ -44,7 +44,7 @@ function App() {
       let response = await fetch(`/fruits/${selectedCountry}/${month}`);
       if (response.ok) {
         let data = await response.json();
-        setRequest2(data);
+        setMonthfruits(data);
         console.log(data)
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
@@ -73,8 +73,8 @@ function App() {
           <Route path="/" element={ <UserView requestMonthCb={text => requestMonth(text)}
                   setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
                   requestMonth2Cb={text => requestMonth2(text)}
-                  monthVeggies = {request}
-                  monthFruits={request2}/>}> 
+                  monthVeggies = {monthveggies}
+                  monthFruits={monthfruits}/>}> 
           </Route>
             
         {/* STARTED TO CHANGE ROUTES WHEN CHANGING COUNTRY, MONTH, VEGGIES OR FRUITS */}
@@ -82,12 +82,12 @@ function App() {
                   <UserView requestMonthCb={text => requestMonth(text)}
                   setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
                   requestMonth2Cb={text => requestMonth2(text)}
-                  monthVeggies = {request}
-                  monthFruits={request2}/>}>
+                  monthVeggies = {monthveggies}
+                  monthFruits={monthfruits}/>}>
             </Route> */}
 
             {/* <Route path=":month/veggies" element={
-                      <VeggiesGrid monthVeggies = {request}/>
+                      <VeggiesGrid monthVeggies = {monthveggies}/>
                     }>
             </Route> */}
 
