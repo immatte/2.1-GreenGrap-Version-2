@@ -1,0 +1,18 @@
+.bi-1-circle-fill{
+    fill: aqua;
+    color: blue;
+    background-color: aqua;
+    height: 60px;
+    width: 60px;
+    scale: 300%;
+    content: "\f796";
+}
+
+i.bi-arrow-down-right-circle-fil{
+    /* fill: aqua; */
+    color: blue;
+    background-color: aqua;
+    height: 60px;
+    width: 60px;
+    scale: 300%;
+}
