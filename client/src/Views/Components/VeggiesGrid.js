@@ -12,9 +12,6 @@ function VeggiesGrid(props) {
         props.handleVeggieDetailsCb(event)
     };
 
-    // console.log(featVisible)
-    // console.log(featVisible.veggie_url)
-
     return (
     <div>
         <div className='monthVeggies'>

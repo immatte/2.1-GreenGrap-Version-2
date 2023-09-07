@@ -18,12 +18,14 @@ function CalendarGrid(props) {
     // When clicking on a month, we make it active. We start at -1 because 0 has already the first month
     const [ active, setActive ] = useState(-1); //to make one month active
     const [ isFruits, setIsFruits ] = useState(false); //display veggies by default
+    const [ classes, setClasses ] = useState(false);
     // console.log(props.selectedCountry)
 
     // We select a country, and after clicking on a month button it's displaying its grids.
     // But then, we want to select another country, so we change THE SELECTED COUNTRY in the select bar.
     // Now, we are still seeing the grids of the previos selected country but... we don't want that.
     // we need to return the state to -1, where no month is active (and so any grid is displaying). 
+    console.log(classes)
     useEffect (() => {
         setActive(-1)
     }, [props.selectedCountry]);
@@ -33,12 +35,14 @@ function CalendarGrid(props) {
         props.requestMonthCb(month);
         setActive(month);
         setfeatVisible(EMPTY_FORM);
+        setClasses(false);
         // console.log(yearcalendar[month]) //just testing
     };
 
     const handleChangeView = (isFruits) => {
         setIsFruits(isFruits);
         setfeatVisible(EMPTY_FORM);
+        setClasses(false);
     }
 
     //array of the Month used in handleClick function
@@ -55,11 +59,11 @@ function CalendarGrid(props) {
     };
 
   const [featVisible, setfeatVisible] = useState(EMPTY_FORM);
-    
   const handleVeggieDetails = (event) => {
     let featVisible = event.target.alt;
     let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
     setfeatVisible(featVeggie);
+    setClasses(true)
     console.log(featVeggie)
     };
 
@@ -67,11 +71,10 @@ function CalendarGrid(props) {
         let featVisible = event.target.alt;
         let featFruit = props.monthFruits.find(fruit => (fruit.fruit_name===featVisible))
         setfeatVisible(featFruit);
+        setClasses(true)
         console.log(featFruit)
         };
     console.log(props.monthFruits)
-
-
 
     return (
     <div className="row d-flex justify-content-center" id="All">
@@ -90,7 +93,6 @@ function CalendarGrid(props) {
                         ))
                     }
                 </div>}
-
         </div>
 
 
@@ -103,8 +105,26 @@ function CalendarGrid(props) {
                 <div className= {`navItem ${isFruits ? 'active' : null}`}
                      onClick={()=> handleChangeView(true)}>Fruits</div>
             </nav>
-        {(featVisible)&&<img src={featVisible.veggie_url} alt={featVisible.veggie_name}/>}
-        {(isFruits)&&(featVisible)&&<img src={featVisible.fruit_url} alt={featVisible.fruit_name}/>}
+        {(!isFruits)&&(featVisible)&&(
+            
+            <ul className={classes? 'featVisibleVeggie':''}>
+                <img className={classes?'featVeggieImg': ''} src={featVisible.veggie_url} alt={featVisible.veggie_name}/>
+                <div className={classes?'featVeggieText': ''}>
+                    <h3 className={classes?'featVeggieTitle': ''} >{featVisible.veggie_name}</h3>
+                    <p>{featVisible.veggie_description}</p>
+                </div>
+            </ul>
+            
+            )}
+        {(isFruits)&&(featVisible)&&(
+            <ul className={classes?'featVisibleFruit':''}>
+                <img className={classes?'featFruitImg':''} src={featVisible.fruit_url} alt={featVisible.fruit_name}/>
+                <div className={classes?'featFruitText': ''}>
+                    <h3 className={classes?'featFruitTitle': ''}>{featVisible.fruit_name}</h3>
+                    <p>{featVisible.fruit_description}</p>
+                </div>
+            </ul>
+        )}
       {(isFruits)
            ? <FruitsGrid monthFruits = {props.monthFruits}
                 handleFruitDetailsCb={fruit => handleFruitDetails(fruit)}

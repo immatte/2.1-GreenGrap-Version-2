@@ -14,12 +14,10 @@
 
 #All {
     box-sizing: border-box;
-    text-align: center;
 }
 
 .navItem {
     color: rgb(175, 170, 109);
-    text-align: center;
 }
 
 .background h2 {
@@ -45,7 +43,7 @@
     
 }
 .monthsbox{
-    /* width: 300px; */
+    text-align: center;
     background-color: rgba(255, 255, 255, 0.847);
     border-radius: 8px;
     color: rgb(134, 130, 84);

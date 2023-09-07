@@ -9,6 +9,7 @@ function FruitsGrid(props) {
 
     const handleChangeView = (event) => {
         props.handleFruitDetailsCb(event)
+
     };
     
     return (
@@ -23,8 +24,7 @@ function FruitsGrid(props) {
                      onClick={handleChangeView}
                      src= {fruit.fruit_url}
                      alt= {fruit.fruit_name}
-                  />
-                            
+                  />        
                   <h5 id='fruitText'> {fruit.fruit_name}</h5>
                 </li>
             )) 

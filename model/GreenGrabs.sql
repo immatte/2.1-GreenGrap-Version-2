@@ -31,10 +31,11 @@ CREATE TABLE veggies (
   veggie_name varchar(100) DEFAULT NULL,
   veggie_type varchar(100) DEFAULT NULL,
   veggie_url varchar(200) DEFAULT NULL,
+  veggie_description varchar(1000) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
-INSERT INTO veggies (id, veggie_name, veggie_type, veggie_url)
+INSERT INTO veggies (id, veggie_name, veggie_type, veggie_url, veggie_description)
 VALUES (1,'tomate','vegetable','https://www.elhuertodelabuelo.es/37-large_default/tomate-cana-andaluz.jpg'),
 (2,'zanahoria','vegetable','https://graneleselmontanes.es/112-large_default/zanahoria-bio-caja-10-kg.jpg'),
 (3,'espárrago','vegetable','https://www.despensa.es/documents/10180/10736/950979_G.jpg'),
@@ -67,12 +68,13 @@ CREATE TABLE fruits (
   id int NOT NULL AUTO_INCREMENT,
   fruit_name varchar(100) DEFAULT NULL,
   fruit_url varchar(100) DEFAULT NULL,
+  fruit_description varchar(1000) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
-INSERT INTO fruits (id, fruit_name, fruit_url) 
-VALUES (1,'aguacate',"https://frutascharito.es/702-large_default/aguacates-unidad.jpg"),
-(2,'guayaba',"https://frutascharito.es/758-large_default/guayabas.jpg"),
+INSERT INTO fruits (id, fruit_name, fruit_url, fruit_description) 
+VALUES (1,'aguacate',"https://frutascharito.es/702-large_default/aguacates-unidad.jpg", "Getting more tomatoes into your diet may make you less likely to have a stroke, which is when blood flow gets cut off to a part of your brain. Studies suggest that they may ease inflammation, boost your immune system, lower your cholesterol levels, and keep your blood from clotting."),
+(2,'guayaba',"https://frutascharito.es/758-large_default/guayabas.jpg", "The carrot (Daucus carota subsp. sativus) is a root vegetable full of fiber, vitamins and antioxidants. Typically orange in color, though purple, black, red, white, and yellow cultivars exist, all of which are domesticated forms of the wild carrot, Daucus carota, native to Europe and Southwestern Asia."),
 (3,'kiwi',"https://frutascharito.es/1443-large_default/kiwis-unidad.jpg"),
 (4,'limón',"https://frutascharito.es/168-large_default/limones.jpg"),
 (5,'mandarina',"https://frutascharito.es/108-large_default/clementinas-naturales-sin-tratar.jpg"),

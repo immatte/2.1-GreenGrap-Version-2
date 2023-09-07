@@ -1,10 +1,10 @@
 *{
-  text-align: center;
   /* margin: 20px;   */
   /* max-height: 1200px; */
   color: rgb(51, 51, 51);
   box-sizing: border-box;
 } 
+
 #containerApp {
     /* display: flex;  */
     /* (or inline-flex) */
@@ -19,8 +19,12 @@
 padding-top:2%
 }
 
+h2{
+  text-align: center;
+}
+
 #AppTitle{
-  
+  text-align: center;
   /* margin-left: 28%; */
   margin-top: 30px;
   margin-bottom: 30px;

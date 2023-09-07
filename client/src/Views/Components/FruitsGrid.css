@@ -20,6 +20,33 @@
     width: 100%;
     list-style-type:none    
 }
+.featVisibleFruit{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: auto;
+    object-position: center;
+    padding-left: 0px;
+    overflow: hidden;
+}
+
+.featFruitImg{
+    padding-top: 20px;
+    aspect-ratio: 1/1;
+    width: 350px;
+}
+
+.featFruitText{
+    max-width: 400px;
+    padding-top: 110px;
+    text-align: justify;
+    inset-block-start: 10px;
+    inset-inline-start: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.featFruitTitle{
+    text-transform: capitalize;
+}
 
 .fruitImage {
     width: 80%;
@@ -35,13 +62,18 @@
     box-shadow: 1px 1px 10px 1px rgba(72, 72, 72, 0.208);
 }
 
+.fruitImage:hover{
+    cursor: pointer;
+}
+
+
 #fruitText{
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
 #fruitbox{
-
+    text-align: center;
     width: 100%;
     overflow: hidden;
     /* box-sizing: initial; */
