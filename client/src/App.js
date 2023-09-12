@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import UserView from "./Views/UserView";
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import NotFound from './Views/NotFound';
-
+import RecipesView from './Views/RecipesView'
+import CalendarGrid from "./Views/Components/CalendarGrid";
+import SelectCountry from "./Views/Components/SelectCountry";
 /* PARENT FROM USERVIEW AND NOTFOUND
 Check calendarGrid comments for lines 11-28(lines changed I guess)
 */
@@ -13,6 +15,7 @@ function App() {
   const [ monthveggies, setMonthveggies ] = useState([]);
   const [ monthfruits, setMonthfruits ] = useState([]);
   const [ selectedCountry, setSelectedCountry ] = useState();
+  const navigate = useNavigate();
 
   console.log(selectedCountry);
   
@@ -27,6 +30,7 @@ function App() {
         let data = await response.json();
         setMonthveggies(data);
         console.log(data)
+        navigate(`/veggies/${month}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -46,6 +50,7 @@ function App() {
         let data = await response.json();
         setMonthfruits(data);
         console.log(data)
+        navigate(`/fruits/${month}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -70,25 +75,46 @@ function App() {
 
       <div>
         <Routes>
-          <Route path="/" element={ <UserView 
-                  requestMonthCb={text => requestMonth(text)}
-                  requestMonth2Cb={text => requestMonth2(text)}
-                  setSelectedCountry ={setSelectedCountry}  
-                  selectedCountry={selectedCountry}
-                  monthVeggies = {monthveggies}
-                  monthFruits={monthfruits}/>}> 
+          <Route path="/" element={ 
+              <UserView 
+                requestMonthCb={text => requestMonth(text)}
+                requestMonth2Cb={text => requestMonth2(text)}
+                setSelectedCountry ={setSelectedCountry}  
+                selectedCountry={selectedCountry}
+                monthVeggies = {monthveggies}
+                monthFruits={monthfruits}/>}> 
+          </Route>
+          <Route path="/fruits/:monthfruits" element={
+            <UserView 
+              requestMonthCb={text => requestMonth(text)}
+              requestMonth2Cb={text => requestMonth2(text)}
+              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              monthVeggies = {monthveggies}
+              monthFruits={monthfruits}/>}>
+          </Route>
+          <Route path="/veggies/:monthveggies" element={
+            <UserView 
+              requestMonthCb={text => requestMonth(text)}
+              requestMonth2Cb={text => requestMonth2(text)}
+              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              monthVeggies = {monthveggies}
+              monthFruits={monthfruits}/>}>
+          </Route>
+          
+          <Route path="/:monthveggies/recipes" element={<RecipesView/> }>
           </Route>
             
         {/* STARTED TO CHANGE ROUTES WHEN CHANGING COUNTRY, MONTH, VEGGIES OR FRUITS */}
-            {/* <Route path=":month" element={
-                  <UserView requestMonthCb={text => requestMonth(text)}
+            <Route path=":month" element={
+                <CalendarGrid 
+                  requestMonthCb={text => requestMonth(text)}
                   setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
                   requestMonth2Cb={text => requestMonth2(text)}
                   monthVeggies = {monthveggies}
                   monthFruits={monthfruits}/>}>
-            </Route> */}
-
-            {/* <Route path=":month/veggies" element={
+            </Route>
+{/* 
+            <Route path=":month/veggies" element={
                       <VeggiesGrid monthVeggies = {monthveggies}/>
                     }>
             </Route> */}

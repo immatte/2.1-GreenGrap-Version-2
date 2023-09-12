@@ -3,6 +3,7 @@ import './CalendarGrid.css';
 import { useState } from 'react';
 import VeggiesGrid from './VeggiesGrid';
 import FruitsGrid from './FruitsGrid';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 
 
@@ -19,6 +20,8 @@ function CalendarGrid(props) {
     const [ active, setActive ] = useState(-1); //to make one month active
     const [ isFruits, setIsFruits ] = useState(false); //display veggies by default
     const [ classes, setClasses ] = useState(false);
+    const navigate = useNavigate();
+
     // console.log(props.selectedCountry)
 
     // We select a country, and after clicking on a month button it's displaying its grids.
@@ -43,6 +46,7 @@ function CalendarGrid(props) {
         setIsFruits(isFruits);
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
+        navigate(`/fruits/${props.monthFruits}`);
     }
 
     //array of the Month used in handleClick function
@@ -105,6 +109,7 @@ function CalendarGrid(props) {
                 <div className= {`navItem ${isFruits ? 'active' : null}`}
                      onClick={()=> handleChangeView(true)}>Fruits</div>
             </nav>
+        {/* CLICK ON VEGGIE */}
         {(!isFruits)&&(featVisible)&&(
             
             <ul className={classes? 'featVisibleVeggie':''}>
@@ -113,9 +118,14 @@ function CalendarGrid(props) {
                     <h3 className={classes?'featVeggieTitle': ''} >{featVisible.veggie_name}</h3>
                     <p>{featVisible.veggie_description}</p>
                 </div>
+                <div>
+                    <NavLink to="/:monthveggies/recipes">
+                        Recipes
+                    </NavLink>
+                </div>
             </ul>
-            
-            )}
+        )}
+        {/* CLICK ON FRUIT */}
         {(isFruits)&&(featVisible)&&(
             <ul className={classes?'featVisibleFruit':''}>
                 <img className={classes?'featFruitImg':''} src={featVisible.fruit_url} alt={featVisible.fruit_name}/>
@@ -124,7 +134,8 @@ function CalendarGrid(props) {
                     <p>{featVisible.fruit_description}</p>
                 </div>
             </ul>
-        )}
+    )}
+      {/* ALL MONTH VEGGIES / ALL MONTH FRUITS */}
       {(isFruits)
            ? <FruitsGrid monthFruits = {props.monthFruits}
                 handleFruitDetailsCb={fruit => handleFruitDetails(fruit)}

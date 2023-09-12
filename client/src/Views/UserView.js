@@ -3,6 +3,7 @@ import './UserView.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import SelectCountry from './Components/SelectCountry';
 import CalendarGrid from './Components/CalendarGrid';
+import RecipesView from './RecipesView';
 import Header from './Components/Header';
 
 /* CHILD FROM APP */

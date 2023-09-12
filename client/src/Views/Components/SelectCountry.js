@@ -47,7 +47,6 @@ const handleSelectChange = ( event ) => {
     let  value  = event.target.value;
     // console.log(value);
     // console.log('hello')
-    
     props.setSelectedCountry(value);
     console.log(event);
 }
