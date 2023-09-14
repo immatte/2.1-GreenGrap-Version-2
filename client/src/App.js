@@ -95,7 +95,7 @@ function App() {
               monthVeggies = {monthveggies}
               monthFruits={monthfruits}/>}>
           </Route>
-          <Route path="/:countryname/fruits/:monthfruits" element={
+          <Route path="/:countryname/:monthfruits/fruits" element={
             <UserView 
               countriesAcronyms = {countriesAcronyms}
               requestMonthCb={text => requestMonth(text)}
@@ -105,7 +105,26 @@ function App() {
               monthVeggies = {monthveggies}
               monthFruits={monthfruits}/>}>
           </Route>
-          <Route path="/:countryname/veggies/:monthveggies" element={
+          <Route path="/:countryname/:monthveggies/veggies" element={
+            <UserView 
+              requestMonthCb={text => requestMonth(text)}
+              requestMonth2Cb={text => requestMonth2(text)}
+              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              setCountryname = {setCountryname}  countryname = {countryname}
+              monthVeggies = {monthveggies}
+              monthFruits={monthfruits}/>}>
+          </Route>
+          <Route path="/:countryname/:monthfruits/fruits/:fruitName" element={
+            <UserView 
+              countriesAcronyms = {countriesAcronyms}
+              requestMonthCb={text => requestMonth(text)}
+              requestMonth2Cb={text => requestMonth2(text)}
+              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              setCountryname = {setCountryname}  countryname = {countryname}
+              monthVeggies = {monthveggies}
+              monthFruits={monthfruits}/>}>
+          </Route>
+          <Route path="/:countryname/:monthveggies/veggies/:veggieName" element={
             <UserView 
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
