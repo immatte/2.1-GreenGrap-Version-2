@@ -30,7 +30,7 @@ function App() {
         let data = await response.json();
         setMonthveggies(data);
         console.log(data)
-        navigate(`/veggies/${month}`);
+        // navigate(`/veggies/${month}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -50,7 +50,7 @@ function App() {
         let data = await response.json();
         setMonthfruits(data);
         console.log(data)
-        navigate(`/fruits/${month}`);
+        // navigate(`/fruits/${month}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }

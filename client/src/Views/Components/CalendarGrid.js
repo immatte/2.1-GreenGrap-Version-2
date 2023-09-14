@@ -40,13 +40,26 @@ function CalendarGrid(props) {
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
         // console.log(yearcalendar[month]) //just testing
+        if(isFruits){
+            navigate(`/fruits/${month}`);
+            console.log('hello')
+        }
+        if(!isFruits){
+            navigate(`/veggies/${month}`);
+            console.log('hello2')
+        }
     };
 
     const handleChangeView = (isFruits) => {
         setIsFruits(isFruits);
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
-        navigate(`/fruits/${props.monthFruits}`);
+        if(isFruits){
+            navigate(`/fruits/${props.monthFruits[0].month_fk}`);
+        }
+        if(!isFruits){
+            navigate(`/veggies/${props.monthVeggies[0].month_fk}`);
+        }
     }
 
     //array of the Month used in handleClick function
