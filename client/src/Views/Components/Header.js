@@ -19,7 +19,12 @@ function Header(props) {
             Vegetables for your season
           </p>
           <div>
-            <SelectCountry setSelectedCountry = {props.setSelectedCountry} selectedCountry= {props.selectedCountry}/>
+            <SelectCountry 
+              setSelectedCountry = {props.setSelectedCountry}  selectedCountry= {props.selectedCountry}      
+              setCountryname = {props.setCountryname}  countryname = {props.countryname}
+              countriesAcronyms = {props.countriesAcronyms}
+            
+            />
           </div>
         </div>
   );

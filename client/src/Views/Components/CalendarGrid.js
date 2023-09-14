@@ -28,11 +28,12 @@ function CalendarGrid(props) {
     // But then, we want to select another country, so we change THE SELECTED COUNTRY in the select bar.
     // Now, we are still seeing the grids of the previos selected country but... we don't want that.
     // we need to return the state to -1, where no month is active (and so any grid is displaying). 
-    console.log(classes)
     useEffect (() => {
         setActive(-1)
     }, [props.selectedCountry]);
-
+    
+    console.log(props.countryname)
+    
     const handleClick = month => {
         props.requestMonth2Cb(month);
         props.requestMonthCb(month);
@@ -41,25 +42,25 @@ function CalendarGrid(props) {
         setClasses(false);
         // console.log(yearcalendar[month]) //just testing
         if(isFruits){
-            navigate(`/fruits/${month}`);
+            navigate(`/${props.countryname}/fruits/${month}`);
             console.log('hello')
         }
         if(!isFruits){
-            navigate(`/veggies/${month}`);
+            navigate(`/${props.countryname}/veggies/${month}`);
             console.log('hello2')
         }
     };
-
+    //When clicking on Veggie or Fruit button
     const handleChangeView = (isFruits) => {
         setIsFruits(isFruits);
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
-        if(isFruits){
-            navigate(`/fruits/${props.monthFruits[0].month_fk}`);
-        }
-        if(!isFruits){
-            navigate(`/veggies/${props.monthVeggies[0].month_fk}`);
-        }
+        // if(isFruits){
+        //     navigate(`/${props.countryname}/fruits/${props.monthFruits[0].month_fk}`);
+        // }
+        // if(!isFruits){
+        //     navigate(`/${props.countryname}/veggies/${props.monthVeggies[0].month_fk}`);
+        // }
     }
 
     //array of the Month used in handleClick function
@@ -76,6 +77,8 @@ function CalendarGrid(props) {
     };
 
   const [featVisible, setfeatVisible] = useState(EMPTY_FORM);
+
+  // When clicking on a Veggie image
   const handleVeggieDetails = (event) => {
     let featVisible = event.target.alt;
     let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
@@ -83,7 +86,7 @@ function CalendarGrid(props) {
     setClasses(true)
     console.log(featVeggie)
     };
-
+    // When clicking on a Fruit image
     const handleFruitDetails = (event) => {
         let featVisible = event.target.alt;
         let featFruit = props.monthFruits.find(fruit => (fruit.fruit_name===featVisible))

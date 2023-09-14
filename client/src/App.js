@@ -5,7 +5,7 @@ import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import NotFound from './Views/NotFound';
 import RecipesView from './Views/RecipesView'
 import CalendarGrid from "./Views/Components/CalendarGrid";
-import SelectCountry from "./Views/Components/SelectCountry";
+
 /* PARENT FROM USERVIEW AND NOTFOUND
 Check calendarGrid comments for lines 11-28(lines changed I guess)
 */
@@ -15,11 +15,12 @@ function App() {
   const [ monthveggies, setMonthveggies ] = useState([]);
   const [ monthfruits, setMonthfruits ] = useState([]);
   const [ selectedCountry, setSelectedCountry ] = useState();
+  const [ countryname, setCountryname ] = useState([]);
   const navigate = useNavigate();
+  const countriesAcronyms = ["cl", "es"]
 
-  console.log(selectedCountry);
-  
-  
+  console.log(countriesAcronyms)
+
   // requestMonth uses a specific route created for creating a new table
   const requestMonth = async (month) => {
     //NewRequest --> date(Month)
@@ -30,7 +31,6 @@ function App() {
         let data = await response.json();
         setMonthveggies(data);
         console.log(data)
-        // navigate(`/veggies/${month}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -50,7 +50,6 @@ function App() {
         let data = await response.json();
         setMonthfruits(data);
         console.log(data)
-        // navigate(`/fruits/${month}`);
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -77,26 +76,41 @@ function App() {
         <Routes>
           <Route path="/" element={ 
               <UserView 
+                countriesAcronyms = {countriesAcronyms}
                 requestMonthCb={text => requestMonth(text)}
                 requestMonth2Cb={text => requestMonth2(text)}
-                setSelectedCountry ={setSelectedCountry}  
-                selectedCountry={selectedCountry}
+                setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+                setCountryname = {setCountryname}  countryname = {countryname}
                 monthVeggies = {monthveggies}
                 monthFruits={monthfruits}/>}> 
+                
           </Route>
-          <Route path="/fruits/:monthfruits" element={
+          <Route path="/:countryname/" element={
             <UserView 
+              countriesAcronyms = {countriesAcronyms}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              setCountryname = {setCountryname}  countryname = {countryname}
               monthVeggies = {monthveggies}
               monthFruits={monthfruits}/>}>
           </Route>
-          <Route path="/veggies/:monthveggies" element={
+          <Route path="/:countryname/fruits/:monthfruits" element={
+            <UserView 
+              countriesAcronyms = {countriesAcronyms}
+              requestMonthCb={text => requestMonth(text)}
+              requestMonth2Cb={text => requestMonth2(text)}
+              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              setCountryname = {setCountryname}  countryname = {countryname}
+              monthVeggies = {monthveggies}
+              monthFruits={monthfruits}/>}>
+          </Route>
+          <Route path="/:countryname/veggies/:monthveggies" element={
             <UserView 
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              setCountryname = {setCountryname}  countryname = {countryname}
               monthVeggies = {monthveggies}
               monthFruits={monthfruits}/>}>
           </Route>
@@ -105,14 +119,14 @@ function App() {
           </Route>
             
         {/* STARTED TO CHANGE ROUTES WHEN CHANGING COUNTRY, MONTH, VEGGIES OR FRUITS */}
-            <Route path=":month" element={
+            {/* <Route path=":month" element={
                 <CalendarGrid 
                   requestMonthCb={text => requestMonth(text)}
                   setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
                   requestMonth2Cb={text => requestMonth2(text)}
                   monthVeggies = {monthveggies}
                   monthFruits={monthfruits}/>}>
-            </Route>
+            </Route> */}
 {/* 
             <Route path=":month/veggies" element={
                       <VeggiesGrid monthVeggies = {monthveggies}/>
