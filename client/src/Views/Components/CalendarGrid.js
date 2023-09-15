@@ -138,7 +138,7 @@ function CalendarGrid(props) {
                 <div className={classes?'featVeggieText': ''}>
                     <h3 className={classes?'featVeggieTitle': ''} >{featVisible.veggie_name}</h3>
                     <p>{featVisible.veggie_description}</p>
-                    <p className={classes?'featVeggieText': ''}>Recipes</p>
+                    {/* <p className={classes?'featVeggieText': ''}>Recipes</p> */}
                 </div>
             
             </ul>
