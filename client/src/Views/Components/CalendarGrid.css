@@ -62,7 +62,11 @@
 
 .background{
     border-radius: 20px;
-    background-image: url('https://www.pixelstalk.net/wp-content/uploads/images3/Funny-Panda-Backgrounds.jpeg');
+    /* background-image: url('https://i.etsystatic.com/39477223/r/il/28d06b/4621011141/il_794xN.4621011141_mrsx.jpg'); */
+    /* background-image: url('https://i.etsystatic.com/40326717/r/il/27c7ab/4839099646/il_794xN.4839099646_kayg.jpg'); */
+    background-image: url('https://i.etsystatic.com/40326717/r/il/6dacf5/4839098456/il_794xN.4839098456_ku3r.jpg');
+    /* background-image: url('https://thumbs.dreamstime.com/z/ejemplo-divertido-de-la-acuarela-de-panda-bear-54706067.jpg?w=992'); */
+    min-height: 800px;
     background-position: 50% 0%;
     /* background-repeat: no-repeat; */
     /* background-position: center; */
