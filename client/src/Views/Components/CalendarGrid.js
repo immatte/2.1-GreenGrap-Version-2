@@ -32,7 +32,7 @@ function CalendarGrid(props) {
         setActive(-1)
     }, [props.selectedCountry]);
     
-    console.log(props.countryname)
+    console.log("Country name",props.countryname)
     
     const handleClick = month => {
         props.requestMonth2Cb(month);

@@ -96,7 +96,7 @@ function App() {
               monthFruits={monthfruits}/>}>
           </Route>
           <Route path="/:countryname/:monthfruits/fruits" element={
-            <UserView 
+            <CalendarGrid 
               countriesAcronyms = {countriesAcronyms}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
@@ -106,7 +106,7 @@ function App() {
               monthFruits={monthfruits}/>}>
           </Route>
           <Route path="/:countryname/:monthveggies/veggies" element={
-            <UserView 
+            <CalendarGrid 
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
@@ -115,7 +115,7 @@ function App() {
               monthFruits={monthfruits}/>}>
           </Route>
           <Route path="/:countryname/:monthfruits/fruits/:fruitName" element={
-            <UserView 
+            <CalendarGrid 
               countriesAcronyms = {countriesAcronyms}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
@@ -125,7 +125,7 @@ function App() {
               monthFruits={monthfruits}/>}>
           </Route>
           <Route path="/:countryname/:monthveggies/veggies/:veggieName" element={
-            <UserView 
+            <CalendarGrid 
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}

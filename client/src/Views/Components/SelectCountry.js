@@ -19,9 +19,12 @@ useEffect(() => {
 async function getCountries() {
     try {
       let response = await fetch('/countries');
+    //   let response = await fetch(`/${countries}`);
+
       if (response.ok) {
           let countries = await response.json();
           setCountries(countries);
+          console.log(countries)
       } else {
           console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -29,7 +32,6 @@ async function getCountries() {
       console.log(`Server error: ${err.message}`);
   }
   }
-  console.log(countries)
 
 //Search bar built before the dropdown SELECT (maybe useful to make the select bar searchable)
 // let [ input, setInput ] = useState("");
@@ -47,7 +49,6 @@ async function getCountries() {
 
 
 const handleSelectChange = ( event ) => {
-    
     let  value  = event.target.value;
     props.setSelectedCountry(value);
     let country = props.countriesAcronyms[value];

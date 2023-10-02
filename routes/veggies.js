@@ -13,16 +13,29 @@ router.get("/", function(req, res, next) {
 
 
 // GET Month veggies list
-router.get("/:month", function(req, res, next) {
+// router.get("/:month", function(req, res, next) {
+//   let month = req.params.month;
+//   db(`SELECT month_veggies.*, veggies.* FROM month_veggies 
+//   LEFT JOIN veggies ON month_veggies.veggies_fk = veggies.id
+//   Where month_veggies.month_fk = ${month}`)
+//     .then(results => {
+//       res.send(results.data);
+//     })
+//     .catch(err => res.status(500).send(err));
+    
+// });
+
+// GET Month veggies list by country
+router.get("/:country/", function(req, res, next) {
   let month = req.params.month;
+  let country = req.params.country;
   db(`SELECT month_veggies.*, veggies.* FROM month_veggies 
   LEFT JOIN veggies ON month_veggies.veggies_fk = veggies.id
-  Where month_veggies.month_fk = ${month}`)
+  Where month_veggies.country_fk = ${country}`)
     .then(results => {
       res.send(results.data);
     })
     .catch(err => res.status(500).send(err));
-    
 });
 
 // GET Month veggies list by country
@@ -37,24 +50,25 @@ router.get("/:country/:month", function(req, res, next) {
       res.send(results.data);
     })
     .catch(err => res.status(500).send(err));
-    
-});
-
-// GET all veggies from country
-router.get("/countryveggies/:country", function(req, res, next) {
-  let country = req.params.country;
-  db(`SELECT month_veggies.*, veggies.* FROM month_veggies 
-  LEFT JOIN veggies ON month_veggies.veggies_fk = veggies.id
-  AND month_veggies.country_fk = ${country};`)
-    .then(results => {
-      res.send(results.data);
-    })
-    .catch(err => res.status(500).send(err));
-    
 });
 
 
-// GET veggies by id
+
+// // GET all veggies from country
+// router.get("/countryveggies/:country", function(req, res, next) {
+//   let country = req.params.country;
+//   db(`SELECT month_veggies.*, veggies.* FROM month_veggies 
+//   LEFT JOIN veggies ON month_veggies.veggies_fk = veggies.id
+//   AND month_veggies.country_fk = ${country};`)
+//     .then(results => {
+//       res.send(results.data);
+//     })
+//     .catch(err => res.status(500).send(err));
+    
+// });
+
+
+// GET veggie by id
 router.get("/veggie/:id", function(req, res, next) {
   let VeggiesId = req.params.id;
   db(`SELECT * FROM veggies where id=${VeggiesId};`)
