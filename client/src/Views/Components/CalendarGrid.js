@@ -31,6 +31,8 @@ function CalendarGrid(props) {
     useEffect (() => {
         setActive(-1)
     }, [props.selectedCountry]);
+
+    
     
     console.log("Country name",props.countryname)
     
@@ -41,14 +43,14 @@ function CalendarGrid(props) {
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
         // console.log(yearcalendar[month]) //just testing
-        if(isFruits){
-            navigate(`/${props.countryname}/${month}/fruits`);
-            console.log('hello')
-        }
-        if(!isFruits){
-            navigate(`/${props.countryname}/${month}/veggies`);
-            console.log('hello2')
-        }
+        // if(isFruits){
+        //     navigate(`/${props.countryname}/${month}/fruits`);
+        //     console.log('hello')
+        // }
+        // if(!isFruits){
+        //     navigate(`/${props.countryname}/${month}/veggies`);
+        //     console.log('hello2')
+        // }
     };
     //When clicking on Veggie or Fruit button
     const handleChangeView = (isFruits) => {
@@ -155,12 +157,15 @@ function CalendarGrid(props) {
     )}
       {/* ALL MONTH VEGGIES / ALL MONTH FRUITS */}
       {(isFruits)
-           ? <FruitsGrid monthFruits = {props.monthFruits}
+           ? <FruitsGrid 
+                setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
+                monthFruits = {props.monthFruits}
                 handleFruitDetailsCb={fruit => handleFruitDetails(fruit)}
                 featVisible = {props.featVisible}
                 setfeatVisible={props.setfeatVisible}
                 />
            : <VeggiesGrid 
+                setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
                 monthVeggies = {props.monthVeggies}
                 handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
                 featVisible = {props.featVisible}

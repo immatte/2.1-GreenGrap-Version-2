@@ -11,6 +11,9 @@ function VeggiesGrid(props) {
     const handleChangeView = (event) => {
         props.handleVeggieDetailsCb(event)
     };
+    // console.log(props.monthVeggies)
+
+    let veggiesGrid = props.monthVeggies
 
     return (
     <div>
@@ -18,10 +21,10 @@ function VeggiesGrid(props) {
 
             <ul id="VeggiesGrid">
             {
-            props.monthVeggies.map((veggie) => (
+            veggiesGrid.map((veggie) => (
                 <li id='veggiesbox'>
                     <img className='veggieImage'
-                        onClick={handleChangeView}
+                        // onClick={handleChangeView}
                         src= {veggie.veggie_url}
                         alt= {veggie.veggie_name}
                         />

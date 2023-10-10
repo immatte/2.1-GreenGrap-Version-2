@@ -24,6 +24,7 @@ function UserView(props) {
           <div className="row justify-content-center text-left pt-3">
 
             <CalendarGrid 
+              setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
               requestMonthCb={text => props.requestMonthCb(text)}
               requestMonth2Cb={text => props.requestMonth2Cb(text)} monthFruits={props.monthFruits}
               monthVeggies={props.monthVeggies}
