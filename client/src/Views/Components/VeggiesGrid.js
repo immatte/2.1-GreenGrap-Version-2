@@ -24,7 +24,7 @@ function VeggiesGrid(props) {
             veggiesGrid.map((veggie) => (
                 <li id='veggiesbox'>
                     <img className='veggieImage'
-                        // onClick={handleChangeView}
+                        onClick={handleChangeView}
                         src= {veggie.veggie_url}
                         alt= {veggie.veggie_name}
                         />

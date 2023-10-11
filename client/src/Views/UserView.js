@@ -14,20 +14,15 @@ function UserView(props) {
     return (
     <div className="row d-flex justify-content-center">
         <Header        
-            setSelectedCountry={props.setSelectedCountry} 
-            selectedCountry={props.selectedCountry} 
-            setCountryname= {props.setCountryname}
-            countryname= {props.countryname}
-            countriesAcronyms = {props.countriesAcronyms}
+            setSelectedCountry={props.setSelectedCountry} selectedCountry={props.selectedCountry} 
         />
         <CalendarGrid 
             setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
             requestMonthCb={text => props.requestMonthCb(text)}
             requestMonth2Cb={text => props.requestMonth2Cb(text)} monthFruits={props.monthFruits}
             monthVeggies={props.monthVeggies}
-            selectedCountry={props.selectedCountry}
-            countryname= {props.countryname}
-            countriesAcronyms = {props.countriesAcronyms}
+            setSelectedCountry={props.setSelectedCountry} selectedCountry={props.selectedCountry} 
+
         />
     </div>
     );

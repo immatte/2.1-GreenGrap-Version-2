@@ -22,8 +22,8 @@ function CalendarGrid(props) {
     const [ classes, setClasses ] = useState(false);
     const { monthId, country } = useParams();
     const params = useParams();
-    console.log(params)
     const navigate = useNavigate();
+    console.log(params)
 
 
     // console.log(props.selectedCountry)
@@ -36,9 +36,21 @@ function CalendarGrid(props) {
         setActive(-1)
     }, [props.selectedCountry]);
 
+    // useEffect (() => {
+    //     props.setSelectedCountry(params.selectedCountry)
+    //   }, [params.selectedCountry]);
+
+    // useEffect (() => {
+    //     props.requestMonthCb(params.monthId)
+    //   }, [params.monthId]);
+
+    //  useEffect (() => {
+    //     props.requestMonth2Cb(params.monthId)
+    //   }, [params.monthId]);
+
     
     
-    console.log("Country name",props.countryname)
+    console.log("Country name",props.selectedCountry)
     console.log("fruits", props.month)
     
     const handleClick = month => {
@@ -49,11 +61,11 @@ function CalendarGrid(props) {
         setClasses(false);
         // console.log(yearcalendar[month]) //just testing
         if(isFruits){
-            navigate(`/${props.countryname}/${month}/fruits`);
+            navigate(`/${props.selectedCountry}/${month}/fruits`);
             
         }
         if(!isFruits){
-            navigate(`/${props.countryname}/${month}/veggies`);
+            navigate(`/${props.selectedCountry}/${month}/veggies`);
             console.log('hello2')
         }
     };
@@ -63,10 +75,10 @@ function CalendarGrid(props) {
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
         if(isFruits){
-            navigate(`/${props.countryname}/${props.monthFruits[0].month_fk}/fruits`);
+            navigate(`/${props.selectedCountry}/${props.monthFruits[0].month_fk}/fruits`);
         }
         if(!isFruits){
-            navigate(`/${props.countryname}/${props.monthVeggies[0].month_fk}/veggies`);
+            navigate(`/${props.selectedCountry}/${props.monthVeggies[0].month_fk}/veggies`);
         }
     }
 
@@ -92,7 +104,7 @@ function CalendarGrid(props) {
     setfeatVisible(featVeggie);
     setClasses(true)
     console.log(featVeggie)
-    navigate(`/${props.countryname}/${props.monthVeggies[0].month_fk}/veggies/${featVeggie.id}`);
+    navigate(`/${props.selectedCountry}/${props.monthVeggies[0].month_fk}/veggies/${featVeggie.id}`);
 
 
     };
@@ -103,7 +115,7 @@ function CalendarGrid(props) {
         let featFruit = props.monthFruits.find(fruit => (fruit.fruit_name===featVisible))
         setfeatVisible(featFruit);
         setClasses(true)
-        navigate(`/${props.countryname}/${props.monthFruits[0].month_fk}/fruits/${featFruit.id}`);
+        navigate(`/${props.selectedCountry}/${props.monthFruits[0].month_fk}/fruits/${featFruit.id}`);
         console.log(featFruit)
         };
     console.log(props.monthFruits)

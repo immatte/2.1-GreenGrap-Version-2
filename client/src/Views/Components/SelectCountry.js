@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './SelectCountry.css';
 
 /* CHILD FROM HEADER */
@@ -11,9 +11,10 @@ const navigate = useNavigate();
 
 useEffect(() => {
     getCountries();
-  }, []);
+    props.setSelectedCountry(props.selectedCountry)
+  }, [props.selectedCountry]);
 
-    console.log(props.countriesAcronyms)
+    console.log(props.selectedCountry)
 
 //get all countries
 async function getCountries() {
@@ -51,12 +52,9 @@ async function getCountries() {
 const handleSelectChange = ( event ) => {
     let  value  = event.target.value;
     props.setSelectedCountry(value);
-    let country = props.countriesAcronyms[value];
-    console.log(country);
-    props.setCountryname(country);
-    navigate(`/${country}`);
+    navigate(`/${value}`);
+    console.log(props.selectedCountry)
 }
-
     return (
     <div>
             
