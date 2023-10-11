@@ -61,8 +61,7 @@ const handleSelectChange = ( event ) => {
     <div>
             
         <select className = "form-select form-select-lg" id="selected"
-                onChange = { handleSelectChange }
-        >
+                onChange = { handleSelectChange }>
             <option selected id="editOptions"> Select a country </option> 
             { countries.map(country => (
                 <option id="editOptions" value={country.id}>{country.country_name}</option>

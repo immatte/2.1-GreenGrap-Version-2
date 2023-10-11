@@ -3,7 +3,7 @@ import './CalendarGrid.css';
 import { useState } from 'react';
 import VeggiesGrid from './VeggiesGrid';
 import FruitsGrid from './FruitsGrid';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -20,7 +20,11 @@ function CalendarGrid(props) {
     const [ active, setActive ] = useState(-1); //to make one month active
     const [ isFruits, setIsFruits ] = useState(false); //display veggies by default
     const [ classes, setClasses ] = useState(false);
+    const { monthId, country } = useParams();
+    const params = useParams();
+    console.log(params)
     const navigate = useNavigate();
+
 
     // console.log(props.selectedCountry)
 
@@ -35,6 +39,7 @@ function CalendarGrid(props) {
     
     
     console.log("Country name",props.countryname)
+    console.log("fruits", props.month)
     
     const handleClick = month => {
         props.requestMonth2Cb(month);
@@ -43,14 +48,14 @@ function CalendarGrid(props) {
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
         // console.log(yearcalendar[month]) //just testing
-        // if(isFruits){
-        //     navigate(`/${props.countryname}/${month}/fruits`);
-        //     console.log('hello')
-        // }
-        // if(!isFruits){
-        //     navigate(`/${props.countryname}/${month}/veggies`);
-        //     console.log('hello2')
-        // }
+        if(isFruits){
+            navigate(`/${props.countryname}/${month}/fruits`);
+            
+        }
+        if(!isFruits){
+            navigate(`/${props.countryname}/${month}/veggies`);
+            console.log('hello2')
+        }
     };
     //When clicking on Veggie or Fruit button
     const handleChangeView = (isFruits) => {
@@ -104,80 +109,81 @@ function CalendarGrid(props) {
     console.log(props.monthFruits)
 
     return (
-    <div className="row d-flex justify-content-center" id="All">
-        <div className='background'>
-            <h2> Click to find your Month veggies ! </h2>
-               {(props.selectedCountry)&&
-                <div id='months'>
-                    {/* First Part : Calendar Grid buttons*/}
-                    {
-                        yearcalendar.map((y, index) => (
-                             <div key={y}
-                            onClick={() => handleClick(index+1)}
-                            className={`monthsbox ${active === index+1 ? 'active' : null}`}>
-                            {y}                        
-                            </div>
-                        ))
-                    }
-                </div>}
+        
+        <div className="row d-flex justify-content-center" id="All">
+            <div className='background'>
+                <h2> Click to find your Month veggies ! </h2>
+                {(props.selectedCountry)&&
+                    <div id='months'>
+                        {/* First Part : Calendar Grid buttons*/}
+                        {
+                            yearcalendar.map((y, index) => (
+                                <div key={y}
+                                    onClick={() => handleClick(index+1)}
+                                    className={`monthsbox ${active === index+1 ? 'active' : null}`}>
+                                    {y}                        
+                                </div>
+                            ))
+                        }
+                    </div>}
+            </div>
+
+
+            {/* IF A MONTH BUTTON IS CLICKED-ON, THEN DISPLAY THE NAVBAR OF VEGGIES OR FRUITS. AND DISPLAY VEGGIES GRID BY DEFAULT */}
+            {(active>-1) && (
+            <div>
+                <nav className="ForV">
+                    <div className= {`navItem ${!isFruits ? 'active' : null}`} 
+                        onClick={()=>handleChangeView(false)}>Veggies</div>
+                    <div className= {`navItem ${isFruits ? 'active' : null}`}
+                        onClick={()=> handleChangeView(true)}>Fruits</div>
+                </nav>
+                {/* CLICK ON VEGGIE */}
+                {(!isFruits)&&(featVisible)&&(
+                    
+                    <ul className={classes? 'featVisibleVeggie':''}>
+                        <img className={classes?'featVeggieImg': ''} src={featVisible.veggie_url} alt={featVisible.veggie_name}/>
+                        <div className={classes?'featVeggieText': ''}>
+                            <h3 className={classes?'featVeggieTitle': ''} >{featVisible.veggie_name}</h3>
+                            <p>{featVisible.veggie_description}</p>
+                            {/* <p className={classes?'featVeggieText': ''}>Recipes</p> */}
+                        </div>
+                    
+                    </ul>
+                )}
+                {/* CLICK ON FRUIT */}
+                {(isFruits)&&(featVisible)&&(
+                    <ul className={classes?'featVisibleFruit':''}>
+                        <img className={classes?'featFruitImg':''} src={featVisible.fruit_url} alt={featVisible.fruit_name}/>
+                        <div className={classes?'featFruitText': ''}>
+                            <h3 className={classes?'featFruitTitle': ''}>{featVisible.fruit_name}</h3>
+                            <p>{featVisible.fruit_description}</p>
+                        </div>
+                    </ul>
+                )}
+                {/* ALL MONTH VEGGIES / ALL MONTH FRUITS */}
+                {(isFruits)
+                    ? <FruitsGrid 
+                            setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
+                            monthFruits = {props.monthFruits}
+                            handleFruitDetailsCb={fruit => handleFruitDetails(fruit)}
+                            featVisible = {props.featVisible}
+                            setfeatVisible={props.setfeatVisible}
+                            />
+                    : <VeggiesGrid 
+                            setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
+                            monthVeggies = {props.monthVeggies}
+                            handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
+                            featVisible = {props.featVisible}
+                            setfeatVisible={props.setfeatVisible}
+
+                            />
+                        
+                }
+            </div>
+                    )}
+        
         </div>
-
-
-        {/* IF A MONTH BUTTON IS CLICKED-ON, THEN DISPLAY THE NAVBAR OF VEGGIES OR FRUITS. AND DISPLAY VEGGIES GRID BY DEFAULT */}
-        {(active>-1) && (
-        <div>
-           <nav className="ForV">
-                <div className= {`navItem ${!isFruits ? 'active' : null}`} 
-                     onClick={()=>handleChangeView(false)}>Veggies</div>
-                <div className= {`navItem ${isFruits ? 'active' : null}`}
-                     onClick={()=> handleChangeView(true)}>Fruits</div>
-            </nav>
-        {/* CLICK ON VEGGIE */}
-        {(!isFruits)&&(featVisible)&&(
-            
-            <ul className={classes? 'featVisibleVeggie':''}>
-                <img className={classes?'featVeggieImg': ''} src={featVisible.veggie_url} alt={featVisible.veggie_name}/>
-                <div className={classes?'featVeggieText': ''}>
-                    <h3 className={classes?'featVeggieTitle': ''} >{featVisible.veggie_name}</h3>
-                    <p>{featVisible.veggie_description}</p>
-                    {/* <p className={classes?'featVeggieText': ''}>Recipes</p> */}
-                </div>
-            
-            </ul>
-        )}
-        {/* CLICK ON FRUIT */}
-        {(isFruits)&&(featVisible)&&(
-            <ul className={classes?'featVisibleFruit':''}>
-                <img className={classes?'featFruitImg':''} src={featVisible.fruit_url} alt={featVisible.fruit_name}/>
-                <div className={classes?'featFruitText': ''}>
-                    <h3 className={classes?'featFruitTitle': ''}>{featVisible.fruit_name}</h3>
-                    <p>{featVisible.fruit_description}</p>
-                </div>
-            </ul>
-    )}
-      {/* ALL MONTH VEGGIES / ALL MONTH FRUITS */}
-      {(isFruits)
-           ? <FruitsGrid 
-                setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
-                monthFruits = {props.monthFruits}
-                handleFruitDetailsCb={fruit => handleFruitDetails(fruit)}
-                featVisible = {props.featVisible}
-                setfeatVisible={props.setfeatVisible}
-                />
-           : <VeggiesGrid 
-                setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
-                monthVeggies = {props.monthVeggies}
-                handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
-                featVisible = {props.featVisible}
-                setfeatVisible={props.setfeatVisible}
-
-                />
-            
-      }
-           </div>
-            )}
-      
-    </div>
     );
 }
 
