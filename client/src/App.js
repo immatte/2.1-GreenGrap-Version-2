@@ -3,7 +3,6 @@ import UserView from "./Views/UserView";
 import './App.css';
 import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
 import NotFound from './Views/NotFound';
-import RecipesView from './Views/RecipesView'
 import CalendarGrid from "./Views/Components/CalendarGrid";
 
 /* PARENT FROM USERVIEW AND NOTFOUND
@@ -15,14 +14,12 @@ function App() {
   const [ countryVeggies, setCountryVeggies ] = useState([]);
   const [ countryFruits, setCountryFruits ] = useState([]);
   const [ monthVeggies, setMonthVeggies ] = useState([]);
-  // const [ monthId, setMonthId ] = useState();
   const [ monthfruits, setMonthfruits ] = useState([]);
   const [ selectedCountry, setSelectedCountry ] = useState();
   const { monthId, countryId } = useParams();
 
   const navigate = useNavigate();
 
-  // console.log(monthVeggies[0].month_fk)
 
 
   useEffect (() => {
