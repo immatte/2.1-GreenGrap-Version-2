@@ -18,7 +18,7 @@ Future updates to come :
 ⚫ Add recipes section
 ⚫ Add a step NavBar on the top
 
-<video src="https://github.com/immatte/2.1-GreenGrap-Version-2/blob/a971f18b20322f31fa3fdbfae18593bab92d0481" title="GreenGrab Video">
+<video src="https://github.com/immatte/2.1-GreenGrap-Version-2/assets/121168439/b4192166-1c6c-4eaa-ab72-b24e4e8c1463" title="GreenGrab_video">
 Your browser does not support the video tag.
 </video>
 
