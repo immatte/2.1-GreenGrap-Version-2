@@ -18,7 +18,7 @@ Future updates to come :
 ⚫ Add recipes section
 ⚫ Add a step NavBar on the top
 
-<video src="https://github.com/immatte/3_Collaboration_GroMeal/assets/121168439/b4192166-1c6c-4eaa-ab72-b24e4e8c1463" title="GreenGrab Video">
+<video src="https://github.com/immatte/2.1-GreenGrap-Version-2/blob/b22dff53eab45fef57bc8de83bde009f64abe07e/GreenGrab_video.mp4" title="GreenGrab Video">
 Your browser does not support the video tag.
 </video>
 
