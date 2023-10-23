@@ -23,7 +23,7 @@ function CalendarGrid(props) {
     const { monthId, country } = useParams();
     const params = useParams();
     const navigate = useNavigate();
-    console.log(params)
+    console.log(params, "CalendarGrid")
 
 
     // console.log(props.selectedCountry)
@@ -34,7 +34,7 @@ function CalendarGrid(props) {
     // we need to return the state to -1, where no month is active (and so any grid is displaying). 
     useEffect (() => {
         setActive(-1)
-    }, [props.selectedCountry]);
+    }, [params.countryId]);
 
     // useEffect (() => {
     //     props.setSelectedCountry(params.selectedCountry)
@@ -61,12 +61,11 @@ function CalendarGrid(props) {
         setClasses(false);
         // console.log(yearcalendar[month]) //just testing
         if(isFruits){
-            navigate(`/${props.selectedCountry}/${month}/fruits`);
+            navigate(`/${params.countryId}/${month}/fruits`);
             
         }
         if(!isFruits){
-            navigate(`/${props.selectedCountry}/${month}/veggies`);
-            console.log('hello2')
+            navigate(`/${params.countryId}/${month}/veggies`);
         }
     };
     //When clicking on Veggie or Fruit button
@@ -75,10 +74,10 @@ function CalendarGrid(props) {
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
         if(isFruits){
-            navigate(`/${props.selectedCountry}/${props.monthFruits[0].month_fk}/fruits`);
+            navigate(`/${params.countryId}/${params.monthId}/fruits`);
         }
         if(!isFruits){
-            navigate(`/${props.selectedCountry}/${props.monthVeggies[0].month_fk}/veggies`);
+            navigate(`/${params.countryId}/${params.monthId}/veggies`);
         }
     }
 
@@ -103,29 +102,25 @@ function CalendarGrid(props) {
     let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
     setfeatVisible(featVeggie);
     setClasses(true)
-    console.log(featVeggie)
-    navigate(`/${props.selectedCountry}/${props.monthVeggies[0].month_fk}/veggies/${featVeggie.id}`);
+    navigate(`/${params.countryId}/${params.monthId}/veggies/${featVeggie.id}`);
 
 
     };
     // When clicking on a Fruit image
     const handleFruitDetails = (event) => {
         let featVisible = event.target.alt;
-        console.log(event.target)
         let featFruit = props.monthFruits.find(fruit => (fruit.fruit_name===featVisible))
         setfeatVisible(featFruit);
         setClasses(true)
-        navigate(`/${props.selectedCountry}/${props.monthFruits[0].month_fk}/fruits/${featFruit.id}`);
-        console.log(featFruit)
+        navigate(`/${params.countryId}/${params.monthId}/fruits/${featFruit.id}`);
         };
-    console.log(props.monthFruits)
 
     return (
         
         <div className="row d-flex justify-content-center" id="All">
             <div className='background'>
                 <h2> Click to find your Month veggies ! </h2>
-                {(props.selectedCountry)&&
+                {(params.countryId)&&
                     <div id='months'>
                         {/* First Part : Calendar Grid buttons*/}
                         {

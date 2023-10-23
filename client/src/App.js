@@ -150,7 +150,8 @@ function App() {
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
               monthVeggies = {monthVeggies}
-              monthFruits={monthfruits}/>}
+              monthFruits={monthfruits}
+              />}
               >
           </Route>
           <Route path="/:countryId/:monthId/fruits" element={

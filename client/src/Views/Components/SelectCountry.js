@@ -53,7 +53,7 @@ const handleSelectChange = ( event ) => {
     let  value  = event.target.value;
     props.setSelectedCountry(value);
     navigate(`/${value}`);
-    console.log(props.selectedCountry)
+    console.log(value, "handleSelectChange")
 }
     return (
     <div>
