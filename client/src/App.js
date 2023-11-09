@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import UserView from "./Views/UserView";
 import './App.css';
-import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import NotFound from './Views/NotFound';
 import CalendarGrid from "./Views/Components/CalendarGrid";
 
@@ -17,8 +17,6 @@ function App() {
   const [ monthfruits, setMonthfruits ] = useState([]);
   const [ selectedCountry, setSelectedCountry ] = useState();
   const { monthId, countryId } = useParams();
-
-  const navigate = useNavigate();
 
 
 
