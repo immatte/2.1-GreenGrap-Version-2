@@ -1,14 +1,3 @@
-
--- CALENDAR Table for months (not using)
--- DROP TABLE IF EXISTS calendar;
--- CREATE TABLE calendar (
---   id VARCHAR(100),
---   month_Name VARCHAR(100)
--- ); 
-
--- INSERT INTO calendar (id , month_Name)
--- VALUES ('1','January'),('2','February'),('3','March'),('4','April'),('5','May'),('6','June'),('7','July'),('8','August'),('9','September'),('10','October'),('11','November'),('12','December');
-
 -- Comparative TABLE veggies of month
 DROP TABLE IF EXISTS month_veggies;
 
