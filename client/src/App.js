@@ -17,13 +17,31 @@ function App() {
   const [ monthfruits, setMonthfruits ] = useState([]);
   const [ selectedCountry, setSelectedCountry ] = useState();
   const { monthId, countryId } = useParams();
-
-
+  const [countries, setCountries ] = useState([]);
 
   useEffect (() => {
     getAllVeggies()
     getAllFruits()
+    getCountries()
   }, [selectedCountry]);
+
+  //get all countries
+  async function getCountries() {
+    try {
+      let response = await fetch('/countries');
+    //   let response = await fetch(`/${countries}`);
+
+      if (response.ok) {
+          let countries = await response.json();
+          setCountries(countries);
+          console.log(countries)
+      } else {
+          console.log(`Server error: ${response.status} ${response.statusText}`);
+      }
+  } catch (err) {
+      console.log(`Server error: ${err.message}`);
+  }
+  }
 
   const getAllVeggies = async () => {
     //Get the veggies linked to a Country
@@ -32,7 +50,7 @@ function App() {
       if (response.ok) {
         let veggiesData = await response.json();
         setCountryVeggies(veggiesData);
-        console.log(veggiesData)
+        console.log("veggiesData",veggiesData)
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -65,23 +83,7 @@ function App() {
   // console.log('veg', veg)
   // requestMonth uses a specific route created for creating a new table
   const requestMonth = async (month) => {
-    //NewRequest --> date(Month)
-    //Get the veggies linked to Month and Country
-    // try {
-    //   let response = await fetch(`/veggies/${selectedCountry}/${month}`);
-    //   if (response.ok) {
-    //     let data = await response.json();
-    //     setMonthVeggies(data);
-    //     console.log(data)
-    //   } else {
-    //     console.log(`Server error: ${response.status}: ${response.statusText}`);
-    //   }
-    // } catch (err) {
-    //   console.log(`Server error: ${err.message}`);
-    // }
-    
-    // setMonthId(month)
-    let veggies = countryVeggies.filter(v => v.month_fk === `${month}`);
+    let veggies = countryVeggies.filter(v => v.month_fk === `${monthId}`);
     console.log('veggies', veggies)
     setMonthVeggies(veggies);
     
@@ -90,27 +92,17 @@ function App() {
   // console.log(monthVeggies)
 
   const requestMonth2 = async (month) => {
-    //NewRequest --> date(Month)
-    //Get the FRUITS linked to Month and Country
-    // try {
-    //   let response = await fetch(`/fruits/${selectedCountry}/${month}`);
-    //   if (response.ok) {
-    //     let data = await response.json();
-    //     setMonthfruits(data);
-    //     console.log(data)
-    //   } else {
-    //     console.log(`Server error: ${response.status}: ${response.statusText}`);
-    //   }
-    // } catch (err) {
-    //   console.log(`Server error: ${err.message}`);
-    // }
-    console.log(month)
     let fruits = countryFruits.filter(v => v.month_fk === `${month}`);
     console.log('fruits', fruits)
     setMonthfruits(fruits);    
   };
 
   console.log('fruits', monthfruits)
+  console.log('countries', countries)
+  console.log("selectedCountry", selectedCountry)
+  console.log("countryVeggies", countryVeggies)
+
+ 
 
   return (
   <div className="row justify-content-center">
@@ -129,24 +121,27 @@ function App() {
         
         <Routes>
           <Route path="/" element={ 
-              <UserView 
-                setCountryVeggies = {setCountryVeggies} countryVeggies = {countryVeggies}
-                setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
-                requestMonthCb={text => requestMonth(text)}
-                requestMonth2Cb={text => requestMonth2(text)}
-                setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
-                monthVeggies = {monthVeggies}
-                monthFruits={monthfruits}/>}
-                > 
-                
-          </Route>
-          <Route path="/:countryId/" element={
-            <CalendarGrid 
+            <UserView 
               setCountryVeggies = {setCountryVeggies} countryVeggies = {countryVeggies}
               setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              countries={countries}
+              monthVeggies = {monthVeggies}
+              monthFruits={monthfruits}/>}
+              > 
+                
+          </Route>
+          <Route path="/:countryId/" element={
+            <CalendarGrid 
+              countryVeggies = {countryVeggies}
+              setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
+              requestMonthCb={text => requestMonth(text)}
+              requestMonth2Cb={text => requestMonth2(text)}
+              // countryName={countryName}
+              countries = {countries}
+              countryId = {countryId}
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}
               />}
@@ -154,11 +149,14 @@ function App() {
           </Route>
           <Route path="/:countryId/:monthId/fruits" element={
             <CalendarGrid 
-              setCountryVeggies = {setCountryVeggies} countryVeggies = {countryVeggies}
+              countryVeggies = {countryVeggies}
               setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
-              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              // countryName={countryName}
+              // setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              countries = {countries}
+              countryId = {countryId}
               monthId = {monthId}
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}/>}
@@ -166,35 +164,40 @@ function App() {
           </Route>
           <Route path="/:countryId/:monthId/veggies" element={
             <CalendarGrid 
-              setCountryVeggies = {setCountryVeggies} countryVeggies = {countryVeggies}
+              countryVeggies = {countryVeggies}
               setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
+              countries = {countries}
+              countryId = {countryId}
               monthId = {monthId}
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}/>}>
-            
           </Route>
           <Route path="/:countryId/:monthId/fruits/:fruitName" element={
             <CalendarGrid 
-              setCountryVeggies = {setCountryVeggies} countryVeggies = {countryVeggies}
+              countryVeggies = {countryVeggies}
               setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
               monthId = {monthId}
+              countries = {countries}
+              countryId = {countryId}
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}/>}>
           </Route>
           <Route path="/:countryId/:monthId/veggies/:veggieName" element={
             <CalendarGrid 
-              setCountryVeggies = {setCountryVeggies} countryVeggies = {countryVeggies}
+              countryVeggies = {countryVeggies}
               setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
               monthId = {monthId}
+              countries = {countries}
+              countryId = {countryId}
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}/>}>
           </Route>

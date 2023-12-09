@@ -3,7 +3,7 @@ import './CalendarGrid.css';
 import { useState } from 'react';
 import VeggiesGrid from './VeggiesGrid';
 import FruitsGrid from './FruitsGrid';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -35,22 +35,8 @@ function CalendarGrid(props) {
     useEffect (() => {
         setActive(-1)
     }, [params.countryId]);
-
-    // useEffect (() => {
-    //     props.setSelectedCountry(params.selectedCountry)
-    //   }, [params.selectedCountry]);
-
-    // useEffect (() => {
-    //     props.requestMonthCb(params.monthId)
-    //   }, [params.monthId]);
-
-    //  useEffect (() => {
-    //     props.requestMonth2Cb(params.monthId)
-    //   }, [params.monthId]);
-
     
     
-    console.log("Country name",props.selectedCountry)
     console.log("fruits", props.month)
     
     const handleClick = month => {
@@ -80,7 +66,7 @@ function CalendarGrid(props) {
             navigate(`/${params.countryId}/${params.monthId}/veggies`);
         }
     }
-
+    
     //array of the Month used in handleClick function
     let yearcalendar = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
@@ -93,13 +79,15 @@ function CalendarGrid(props) {
         veggie_url: '',
         veggie_fk: '',
     };
+  let monthVeggies = props.countryVeggies.filter(v => v.month_fk === `${params.monthId}`)
 
   const [featVisible, setfeatVisible] = useState(EMPTY_FORM);
 
   // When clicking on a Veggie image
   const handleVeggieDetails = (event) => {
     let featVisible = event.target.alt;
-    let featVeggie = props.monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
+    let featVeggie = monthVeggies.find(veggie => (veggie.veggie_name===featVisible))
+    console.log("featVeggie", featVeggie)
     setfeatVisible(featVeggie);
     setClasses(true)
     navigate(`/${params.countryId}/${params.monthId}/veggies/${featVeggie.id}`);
@@ -114,11 +102,21 @@ function CalendarGrid(props) {
         setClasses(true)
         navigate(`/${params.countryId}/${params.monthId}/fruits/${featFruit.id}`);
         };
+        console.log(params.countryId)
+    
+    console.log("countries", props.countries)
+    console.log("params.countryId", params.countryId)
+    
+    let countryName = props.countries.find(country => (country.id == params.countryId))
+    console.log("countryName", countryName)
 
     return (
         
         <div className="row d-flex justify-content-center" id="All">
             <div className='background'>
+                {(countryName)&&
+                    <h1> Checking the seasonal veggies in {countryName.country_name} </h1> 
+                }
                 <h2> Click to find your Month veggies ! </h2>
                 {(params.countryId)&&
                     <div id='months'>
@@ -171,15 +169,16 @@ function CalendarGrid(props) {
                 {/* ALL MONTH VEGGIES / ALL MONTH FRUITS */}
                 {(isFruits)
                     ? <FruitsGrid 
-                            setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
+                            countryVeggies = {props.countryVeggies}
                             monthFruits = {props.monthFruits}
                             handleFruitDetailsCb={fruit => handleFruitDetails(fruit)}
                             featVisible = {props.featVisible}
                             setfeatVisible={props.setfeatVisible}
                             />
                     : <VeggiesGrid 
-                            setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
+                            countryVeggies = {props.countryVeggies}
                             monthVeggies = {props.monthVeggies}
+                            requestMonthCb={text => props.requestMonthCb(text)}
                             handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
                             featVisible = {props.featVisible}
                             setfeatVisible={props.setfeatVisible}

@@ -1,19 +1,24 @@
 import React, { useEffect } from 'react';
 import './VeggiesGrid.css';
-import { useState } from 'react';
-import { Routes, Route, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 /* CHILD OF USERVIEW */
 
 function VeggiesGrid(props) {
+    const params = useParams();
 
     //MAKE VISIBLE VEGGIE DETAILS WHEN CLICKING ON A VEGGIE IMAGE FROM THE GRID
     const handleChangeView = (event) => {
         props.handleVeggieDetailsCb(event)
     };
     // console.log(props.monthVeggies)
+    // let monthVeggies = countryVeggies.find()
+    // let veggiesGrid = props.monthVeggies
+    console.log("props.countryVeggies", props.countryVeggies)
+    console.log("params.monthId", params.monthId)
 
-    let veggiesGrid = props.monthVeggies
+    let veggiesGrid2 = props.countryVeggies.filter(v => v.month_fk === `${params.monthId}`)
+    console.log("veggiesGrid2", veggiesGrid2)
 
     return (
     <div>
@@ -21,7 +26,7 @@ function VeggiesGrid(props) {
 
             <ul id="VeggiesGrid">
             {
-            veggiesGrid.map((veggie) => (
+            veggiesGrid2.map((veggie) => (
                 <li id='veggiesbox'>
                     <img className='veggieImage'
                         onClick={handleChangeView}

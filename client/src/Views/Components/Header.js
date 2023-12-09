@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from 'react';
 import './Header.css';
 import SelectCountry from "./SelectCountry";
 
@@ -9,8 +9,6 @@ Check calendarGrid comments for lines 11-28
 
 function Header(props) {
 
-
-
   return (
         <div className="d-flex flex-nowrap justify-content-between m-0" id="containerApp">
           {/* <i className="bi bi-arrow-down-right-circle-fill"></i>
@@ -20,7 +18,8 @@ function Header(props) {
           </p>
           <div>
             <SelectCountry 
-              setSelectedCountry = {props.setSelectedCountry}  selectedCountry= {props.selectedCountry}      
+              setSelectedCountry = {props.setSelectedCountry}  selectedCountry= {props.selectedCountry}    
+              countries= {props.countries}      
             />
           </div>
         </div>
