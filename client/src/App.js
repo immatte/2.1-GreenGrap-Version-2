@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
+import { Routes, Route, useParams } from 'react-router-dom';
 import UserView from "./Views/UserView";
 import './App.css';
-import { Routes, Route, useParams } from 'react-router-dom';
 import NotFound from './Views/NotFound';
 import CalendarGrid from "./Views/Components/CalendarGrid";
 
@@ -10,7 +10,6 @@ Check calendarGrid comments for lines 11-28(lines changed I guess)
 */
 
 function App() {
-
   const [ countryVeggies, setCountryVeggies ] = useState([]);
   const [ countryFruits, setCountryFruits ] = useState([]);
   const [ monthVeggies, setMonthVeggies ] = useState([]);
@@ -137,6 +136,7 @@ function App() {
             <CalendarGrid 
               countryVeggies = {countryVeggies}
               setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
+              getAllVeggiesCb={text => getAllVeggies(text)}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
               // countryName={countryName}
@@ -146,10 +146,12 @@ function App() {
               monthFruits={monthfruits}
               />}
               >
+              <Route path=":monthId/veggies" element={<CalendarGrid/>}/>
           </Route>
           <Route path="/:countryId/:monthId/fruits" element={
             <CalendarGrid 
               countryVeggies = {countryVeggies}
+              getAllVeggiesCb={text => getAllVeggies(text)}
               setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
               requestMonthCb={text => requestMonth(text)}
               requestMonth2Cb={text => requestMonth2(text)}
@@ -161,19 +163,6 @@ function App() {
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}/>}
               >
-          </Route>
-          <Route path="/:countryId/:monthId/veggies" element={
-            <CalendarGrid 
-              countryVeggies = {countryVeggies}
-              setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
-              requestMonthCb={text => requestMonth(text)}
-              requestMonth2Cb={text => requestMonth2(text)}
-              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
-              countries = {countries}
-              countryId = {countryId}
-              monthId = {monthId}
-              monthVeggies = {monthVeggies}
-              monthFruits={monthfruits}/>}>
           </Route>
           <Route path="/:countryId/:monthId/fruits/:fruitName" element={
             <CalendarGrid 

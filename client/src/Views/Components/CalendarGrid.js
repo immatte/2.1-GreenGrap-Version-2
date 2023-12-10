@@ -3,7 +3,7 @@ import './CalendarGrid.css';
 import { useState } from 'react';
 import VeggiesGrid from './VeggiesGrid';
 import FruitsGrid from './FruitsGrid';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -35,6 +35,7 @@ function CalendarGrid(props) {
     useEffect (() => {
         setActive(-1)
     }, [params.countryId]);
+
     
     
     console.log("fruits", props.month)
@@ -107,7 +108,7 @@ function CalendarGrid(props) {
     console.log("countries", props.countries)
     console.log("params.countryId", params.countryId)
     
-    let countryName = props.countries.find(country => (country.id == params.countryId))
+    let countryName = props.countries.find(country => (+country.id === +params.countryId))
     console.log("countryName", countryName)
 
     return (
@@ -123,11 +124,13 @@ function CalendarGrid(props) {
                         {/* First Part : Calendar Grid buttons*/}
                         {
                             yearcalendar.map((y, index) => (
-                                <div key={y}
-                                    onClick={() => handleClick(index+1)}
-                                    className={`monthsbox ${active === index+1 ? 'active' : null}`}>
-                                    {y}                        
-                                </div>
+                                <Link to={`/${params.countryId}/${index+1}/veggies`} >
+                                    <div key={y}
+                                        onClick={() => handleClick(index+1)}
+                                        className={`monthsbox ${active === index+1 ? 'active' : null}`}>
+                                        {y}                        
+                                    </div>
+                                </Link>
                             ))
                         }
                     </div>}
