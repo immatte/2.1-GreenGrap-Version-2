@@ -54,14 +54,6 @@ function CalendarGrid(props) {
         setActive(month);
         setfeatVisible(EMPTY_FORM);
         setClasses(false);
-        // console.log(yearcalendar[month]) //just testing
-        if(isFruits){
-            navigate(`/${params.countryId}/${month}/fruits`);
-            
-        }
-        if(!isFruits){
-            navigate(`/${params.countryId}/${month}/veggies`);
-        }
     };
     //When clicking on Veggie or Fruit button
     const handleChangeView = (isFruits) => {
@@ -134,7 +126,7 @@ function CalendarGrid(props) {
                         {/* First Part : Calendar Grid buttons*/}
                         {
                             yearcalendar.map((y, index) => (
-                                <Link to={`/${params.countryId}/${index+1}/veggies`} >
+                                <Link to={!isFruits ? `/${params.countryId}/${index+1}/veggies`:`/${params.countryId}/${index+1}/fruits`} >
                                     <div key={y}
                                         onClick={() => handleClick(index+1)}
                                         className={`monthsbox ${active === index+1 ? 'active' : null}`}>

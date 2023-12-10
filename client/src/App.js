@@ -18,7 +18,6 @@ function App() {
   const [ monthfruits, setMonthfruits ] = useState([]);
   const [ selectedCountry, setSelectedCountry ] = useState();
   const { monthId, countryId } = useParams();
-  const params = useParams();
   const [countries, setCountries ] = useState([]);
 
 
