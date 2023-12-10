@@ -4,6 +4,8 @@ import UserView from "./Views/UserView";
 import './App.css';
 import NotFound from './Views/NotFound';
 import CalendarGrid from "./Views/Components/CalendarGrid";
+import VeggiesGrid from "./Views/Components/VeggiesGrid";
+import FruitsGrid from "./Views/Components/FruitsGrid";
 
 /* PARENT FROM USERVIEW AND NOTFOUND
 Check calendarGrid comments for lines 11-28(lines changed I guess)
@@ -16,13 +18,21 @@ function App() {
   const [ monthfruits, setMonthfruits ] = useState([]);
   const [ selectedCountry, setSelectedCountry ] = useState();
   const { monthId, countryId } = useParams();
+  const params = useParams();
   const [countries, setCountries ] = useState([]);
+
+
+  useEffect (() => {
+    getCountries()
+    console.log("loaded Countries")
+  }, [selectedCountry]);
 
   useEffect (() => {
     getAllVeggies()
+    console.log("loaded AllVeggies")
     getAllFruits()
-    getCountries()
-  }, [selectedCountry]);
+    console.log("loaded AllFruits")
+  }, [monthId, selectedCountry]);
 
   //get all countries
   async function getCountries() {
@@ -33,7 +43,7 @@ function App() {
       if (response.ok) {
           let countries = await response.json();
           setCountries(countries);
-          console.log(countries)
+          console.log("loaded Countries", countries)
       } else {
           console.log(`Server error: ${response.status} ${response.statusText}`);
       }
@@ -49,7 +59,7 @@ function App() {
       if (response.ok) {
         let veggiesData = await response.json();
         setCountryVeggies(veggiesData);
-        console.log("veggiesData",veggiesData)
+        console.log("loaded AllVeggies",veggiesData)
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -66,7 +76,7 @@ function App() {
       if (response.ok) {
         let fruitsData = await response.json();
         setCountryFruits(fruitsData);
-        console.log(fruitsData)
+        console.log("loaded AllFruits",fruitsData)
       } else {
         console.log(`Server error: ${response.status}: ${response.statusText}`);
       }
@@ -82,7 +92,7 @@ function App() {
   // console.log('veg', veg)
   // requestMonth uses a specific route created for creating a new table
   const requestMonth = async (month) => {
-    let veggies = countryVeggies.filter(v => v.month_fk === `${monthId}`);
+    let veggies = countryVeggies.filter(v => v.month_fk === `${month}`);
     console.log('veggies', veggies)
     setMonthVeggies(veggies);
     
@@ -130,8 +140,6 @@ function App() {
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}/>}
               > 
-                
-          </Route>
           <Route path="/:countryId/" element={
             <CalendarGrid 
               countryVeggies = {countryVeggies}
@@ -141,55 +149,21 @@ function App() {
               requestMonth2Cb={text => requestMonth2(text)}
               // countryName={countryName}
               countries = {countries}
+              setSelectedCountry ={setSelectedCountry} 
               countryId = {countryId}
               monthVeggies = {monthVeggies}
               monthFruits={monthfruits}
               />}
-              >
-              <Route path=":monthId/veggies" element={<CalendarGrid/>}/>
+              />
+              <Route path=":countryId/:monthId/veggies" element={<VeggiesGrid/>}/>
+              <Route path=":countryId/:monthId/fruits" element={<FruitsGrid/>}/>
+              <Route path=":countryId/:monthId/veggies/:veggieName" element={<VeggiesGrid/>}/>
+              <Route path=":countryId/:monthId/fruits/:fruitName" element={<FruitsGrid/>}/>
+                
           </Route>
-          <Route path="/:countryId/:monthId/fruits" element={
-            <CalendarGrid 
-              countryVeggies = {countryVeggies}
-              getAllVeggiesCb={text => getAllVeggies(text)}
-              setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
-              requestMonthCb={text => requestMonth(text)}
-              requestMonth2Cb={text => requestMonth2(text)}
-              // countryName={countryName}
-              // setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
-              countries = {countries}
-              countryId = {countryId}
-              monthId = {monthId}
-              monthVeggies = {monthVeggies}
-              monthFruits={monthfruits}/>}
-              >
-          </Route>
-          <Route path="/:countryId/:monthId/fruits/:fruitName" element={
-            <CalendarGrid 
-              countryVeggies = {countryVeggies}
-              setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
-              requestMonthCb={text => requestMonth(text)}
-              requestMonth2Cb={text => requestMonth2(text)}
-              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
-              monthId = {monthId}
-              countries = {countries}
-              countryId = {countryId}
-              monthVeggies = {monthVeggies}
-              monthFruits={monthfruits}/>}>
-          </Route>
-          <Route path="/:countryId/:monthId/veggies/:veggieName" element={
-            <CalendarGrid 
-              countryVeggies = {countryVeggies}
-              setCountryFruits = {setCountryFruits} countryFruits = {countryFruits}
-              requestMonthCb={text => requestMonth(text)}
-              requestMonth2Cb={text => requestMonth2(text)}
-              setSelectedCountry ={setSelectedCountry}  selectedCountry={selectedCountry}
-              monthId = {monthId}
-              countries = {countries}
-              countryId = {countryId}
-              monthVeggies = {monthVeggies}
-              monthFruits={monthfruits}/>}>
-          </Route>
+
+
+          {/* </Route> */}
           
           {/* <Route path="/:monthId/recipes" element={<RecipesView/> }>
           </Route> */}

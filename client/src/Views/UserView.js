@@ -19,8 +19,8 @@ console.log('countries', props.countries)
             countries={props.countries}
         />
         <CalendarGrid 
-            getAllVeggiesCb={text => props.getAllVeggies(text)}
-            getAllFruitsCb={text => props.getAllFruits(text)}
+            // getAllVeggiesCb={text => props.getAllVeggies(text)}
+            // getAllFruitsCb={text => props.getAllFruits(text)}
         
             setCountryVeggies = {props.setCountryVeggies} countryVeggies = {props.countryVeggies}
             requestMonthCb={text => props.requestMonthCb(text)}

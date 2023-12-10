@@ -20,7 +20,7 @@ function CalendarGrid(props) {
     const [ active, setActive ] = useState(-1); //to make one month active
     const [ isFruits, setIsFruits ] = useState(false); //display veggies by default
     const [ classes, setClasses ] = useState(false);
-    const { monthId, country } = useParams();
+    // const { monthId, countryId } = useParams();
     const params = useParams();
     const navigate = useNavigate();
     console.log(params, "CalendarGrid")
@@ -33,8 +33,16 @@ function CalendarGrid(props) {
     // Now, we are still seeing the grids of the previos selected country but... we don't want that.
     // we need to return the state to -1, where no month is active (and so any grid is displaying). 
     useEffect (() => {
+        // props.getAllVeggiesCb()
+        props.requestMonth2Cb(params.monthId);
+        props.requestMonthCb(params.monthId);
+        props.setSelectedCountry(params.countryId)
+    }, [params.monthId]);
+    
+
+    useEffect (() => {
         setActive(-1)
-    }, [params.countryId]);
+    }, [params.countryId, props.selectedCountry]);
 
     
     
@@ -80,8 +88,8 @@ function CalendarGrid(props) {
         veggie_url: '',
         veggie_fk: '',
     };
-  let monthVeggies = props.countryVeggies.filter(v => v.month_fk === `${params.monthId}`)
-
+    const monthVeggies = props.countryVeggies.filter(v => v.month_fk === `${params.monthId}`)
+  
   const [featVisible, setfeatVisible] = useState(EMPTY_FORM);
 
   // When clicking on a Veggie image
@@ -108,8 +116,10 @@ function CalendarGrid(props) {
     console.log("countries", props.countries)
     console.log("params.countryId", params.countryId)
     
-    let countryName = props.countries.find(country => (+country.id === +params.countryId))
-    console.log("countryName", countryName)
+    const countryName = props.countries.find(country => (+country.id === +params.countryId))
+    
+
+        console.log("countryName", countryName)
 
     return (
         
@@ -181,7 +191,7 @@ function CalendarGrid(props) {
                     : <VeggiesGrid 
                             countryVeggies = {props.countryVeggies}
                             monthVeggies = {props.monthVeggies}
-                            requestMonthCb={text => props.requestMonthCb(text)}
+                            // requestMonthCb={text => props.requestMonthCb(text)}
                             handleVeggieDetailsCb={veggie => handleVeggieDetails(veggie)}
                             featVisible = {props.featVisible}
                             setfeatVisible={props.setfeatVisible}
